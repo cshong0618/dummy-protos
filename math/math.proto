@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package math;
+
+option go_package = "github.com/cshong0618/dummy-protos/math";
+option java_package = "com.cshong0618.dummyprotos.math";
+
+message Operands {
+  double a = 1;
+  double b = 2;
+}
+
+message OperationReply { double answer = 1; }
+
+message FailableOperationReply {
+  double answer = 1;
+  bool success = 2;
+}
+
+service SimpleCalculator {
+  rpc Add(Operands) returns (OperationReply) {}
+  rpc Sub(Operands) returns (OperationReply) {}
+  rpc Mul(Operands) returns (OperationReply) {}
+  rpc Div(Operands) returns (FailableOperationReply) {}
+}
